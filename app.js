@@ -128,6 +128,7 @@ User.sync({force: true}).then(function () {
         nick: 'zyx2',
         department: '技术'
     });
+// then的输入为上一步的结果
 }).then(function (user) {
 
     console.log(user.get(
