@@ -92,7 +92,8 @@ var sequelize = new Sequelize(
         'host': 'localhost',
         'port': 3306,
         'define': {
-            'underscored': true
+            'underscored': true,
+            'charset':'utf8mb4'
         }
 
     }
@@ -125,7 +126,7 @@ User.sync({force: true}).then(function () {
     return User.create({
         emp_id: '2',
         nick: 'zyx2',
-        department: 'IT'
+        department: '技术'
     });
 }).then(function (user) {
 
