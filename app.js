@@ -82,17 +82,18 @@ var sequelize = new Sequelize(
     'root',
     '123456',
     {
-        'dialect': 'mysql',
-        'dialectOptions': {
+        dialect: 'mysql',
+        dialectOptions: {
             charset: "utf8mb4",
-            collate: "utf8mb4_unicode_ci",
             supportBigNumbers: true,
             bigNumberStrings: true
         },
         'host': 'localhost',
         'port': 3306,
+        //在define中加入
         'define': {
-            'underscored': true
+            'underscored': true,
+            'charset':'utf8mb4'
         }
 
     }
@@ -103,16 +104,16 @@ var User = sequelize.define(
     'user',
     {
         'emp_id': {
-            'type': Sequelize.CHAR(10),
+            'type': Sequelize.STRING,
             'allowNULL': false,
             'unique': true
         },
         'nick': {
-            'type': Sequelize.CHAR(10),
+            'type': Sequelize.STRING,
             'allowNULL': false
         },
         'department': {
-            'type': Sequelize.STRING(64),
+            'type': Sequelize.STRING,
             'allowNULL': false
         },
     }
@@ -125,7 +126,7 @@ User.sync({force: true}).then(function () {
     return User.create({
         emp_id: '2',
         nick: 'zyx2',
-        department: 'IT'
+        department: '技术'
     });
 }).then(function (user) {
 
@@ -135,65 +136,7 @@ User.sync({force: true}).then(function () {
         }
     ));
 
-    // 查找一条数据
-    User.findOne(
-        {
-            where:{
-                emp_id: '2'
-            }
-        }
-    ).then(function(result){
-        console.log('after create find  user');
-        console.log(result);
-    });
-
-//修改一条数据
-    user.update(
-        {
-            department: 'IT2'
-        },{
-            where:
-            {
-                emp_id: '2'
-            }
-        }
-    ).then(function (jane) {
-        console.log(jane.get(
-            {
-            plain: true
-            }
-        ));
-//删除一条数据
-        User.destroy(
-            {
-                where:{
-                    emp_id: '2'
-                }
-
-            }
-        ).then(function(result){
-            console.log('destroy user');
-            console.log(result);
-
-// 查找一条数据
-            User.findOne(
-                {
-                    where:{
-                        emp_id: '2'
-                    }
-                }
-            ).then(function(result){
-                console.log('after delete find  user');
-                console.log(result);
-            });
-
-        });
-
-    });
 });
-
-
-
 
 
 module.exports = app;
