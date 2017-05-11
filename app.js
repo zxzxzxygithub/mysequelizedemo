@@ -90,7 +90,7 @@ var sequelize = new Sequelize(
         },
         'host': 'localhost',
         'port': 3306,
-        //在define中加入
+        //在define中加入utf8mb4
         'define': {
             'underscored': true,
             'charset':'utf8mb4'
