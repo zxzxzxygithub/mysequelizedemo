@@ -129,6 +129,24 @@ User.sync({force: true}).then(function () {
     });
 }).then(function (user) {
 
+    console.log(user.get(
+        {
+            plain: true
+        }
+    ));
+
+    // 查找一条数据
+    User.findOne(
+        {
+            where:{
+                emp_id: '2'
+            }
+        }
+    ).then(function(result){
+        console.log('after create find  user');
+        console.log(result);
+    });
+
 //修改一条数据
     user.update(
         {
@@ -157,7 +175,17 @@ User.sync({force: true}).then(function () {
             console.log('destroy user');
             console.log(result);
 
-
+// 查找一条数据
+            User.findOne(
+                {
+                    where:{
+                        emp_id: '2'
+                    }
+                }
+            ).then(function(result){
+                console.log('after delete find  user');
+                console.log(result);
+            });
 
         });
 
